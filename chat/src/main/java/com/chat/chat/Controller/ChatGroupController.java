@@ -26,9 +26,9 @@ public class ChatGroupController {
 		return service.createGroup(c)	;
 	}
 	
-	@DeleteMapping("/delete")
-	public ResponseEntity<String> dismantleGroup(Long id){
-		return service.dismantleGroup(id);
+	@DeleteMapping("/delete/{id}/{uid}")
+	public ResponseEntity<String> dismantleGroup(@PathVariable ("id") Long id,@PathVariable ("uid") Long uid){
+		return service.dismantleGroup(id,uid);
 	}
 	
 	@RequestMapping("/changeDesc/{desc}/{id}")
