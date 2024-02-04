@@ -27,14 +27,15 @@ public class ChatGroupServiceImpl implements ChatGroupService {
 	}
 
 	@Override
-	public ResponseEntity<String> dismantleGroup(Long id) {
+	public ResponseEntity<String> dismantleGroup(Long id,Long uid) {
 		ChatGroup c=repo.findById(id).orElse(null);
+		boolean b=c.getAdmins().contains(uid);
 		try {
-			if(c!=null) {
+			if(c!=null && b) {
 				repo.delete(c);
 				return new ResponseEntity<>("Deleted",HttpStatus.OK);
 			}else {
-				return new ResponseEntity<>("No such group exists",HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("No such group exists or u dont have access",HttpStatus.NOT_FOUND);
 	
 			}
 			
